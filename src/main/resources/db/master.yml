@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/entity-producer.yml
+  - include:
+      file: db/changelog/entity-marketplace.yml
+  - include:
+      file: db/changelog/entity-seller_info.yml
+  - include:
+      file: db/changelog/entity-seller.yml

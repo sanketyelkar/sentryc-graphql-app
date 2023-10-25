@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-producers-table
+      author: sanket
+      changes:
+        - createTable:
+            tableName: producers
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: producersPK
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                    defaultValueComputed: 'now()'
+  - changeSet:
+      id: insert-producers-data
+      author: sanket
+      changes:
+        - sqlFile:
+            path: db/data/producers_data.sql

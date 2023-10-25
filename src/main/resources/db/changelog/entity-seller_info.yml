@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-seller-infos-table
+      author: sanket
+      changes:
+        - createTable:
+            tableName: seller_infos
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: seller_infosPK
+              - column:
+                  name: marketplace_id
+                  type: varchar(255)
+                  constraints:
+                    foreignKeyName: FKr8ekbqgwa3g0uhgbaa1tchk09
+                    references: marketplaces(id)
+              - column:
+                  name: name
+                  type: varchar(2048)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: url
+                  type: varchar(2048)
+              - column:
+                  name: country
+                  type: varchar(255)
+              - column:
+                  name: external_id
+                  type: varchar(255)
+            constraints:
+              - uniqueConstraint:
+                  constraintName: UK12xaxk0c1mwxr3ovycs1qxtbz
+                  columns: marketplace_id, external_id
+  - changeSet:
+      id: insert-seller-info-data
+      author: sanket
+      changes:
+        - sqlFile:
+            path: db/data/seller_info_data.sql

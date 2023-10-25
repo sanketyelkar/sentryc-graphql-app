@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-sellers-table
+      author: sanket
+      changes:
+        - createTable:
+            tableName: sellers
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: marketplace_sellersPK
+              - column:
+                  name: producer_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: FK6y70nxr3lhubusfq6ub427ien
+                    references: producers(id)
+              - column:
+                  name: seller_info_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: FKp2fkfcqcndx9x9xkhk5va3cq4
+                    references: seller_infos(id)
+              - column:
+                  name: state
+                  type: varchar(255)
+                  defaultValue: 'REGULAR'
+                  constraints:
+                    nullable: false
+            constraints:
+              - uniqueConstraint:
+                  constraintName: UK_sellers_producer_seller_info_state
+                  columns: producer_id, seller_info_id, state
+  - changeSet:
+      id: insert-seller-data
+      author: sanket
+      changes:
+        - sqlFile:
+            path: db/data/seller_data.sql

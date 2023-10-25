@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  syntryc-graphql-db:
+    image: postgres:13-alpine
+    container_name: sentryc-postgres-container-lts
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sentryc_interview
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - sentryc-postgres-vol:/var/lib/postgresql/data
+
+volumes:
+  sentryc-postgres-vol:
